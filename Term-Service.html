@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ব্যবহারের শর্তাবলী - Bangladesh Cyber Troops (BCT TOOLS HUB)</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #c7d2fe;
+            --secondary: #10b981;
+            --bg-color: #f7f8fc;
+            --surface-color: #ffffff;
+            --text-color: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --radius: 16px;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        /* --- Header --- */
+        .main-header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        .logo img { height: 45px; width: 45px; }
+        .logo-text { font-size: 1.3rem; font-weight: 800; }
+        .logo-text span { color: var(--primary); }
+        .back-home-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color var(--transition-speed);
+        }
+        .back-home-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 20px;
+        }
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* --- Terms Content --- */
+        .terms-container {
+            background-color: var(--surface-color);
+            padding: 50px;
+            margin: -40px auto 60px auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            z-index: 10;
+        }
+
+        .terms-section {
+            margin-bottom: 45px;
+        }
+
+        .terms-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .terms-section .icon-wrapper {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .terms-section p, .terms-section ul {
+            color: var(--text-muted);
+            padding-left: 5px;
+        }
+        
+        .terms-section ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .terms-section li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .terms-section li::before {
+            content: "\f058"; /* Font Awesome check-circle icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--secondary);
+        }
+
+        .terms-section a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .terms-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-box {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+             background: var(--text-color);
+             color: #a0aec0;
+             padding: 40px 0 20px 0;
+             text-align: center;
+        }
+        .footer-bottom a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.2rem; }
+            .terms-container { padding: 40px 25px; }
+            .terms-section h2 { font-size: 1.6rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"> <!-- আপনার হোমপেজের সঠিক লিঙ্ক দিন -->
+                <img src="https://i.ibb.co/MyZXHdHf/app-icon.png" alt="BCT TOOLS HUB Logo">
+                <div class="logo-text">BCT<span> TOOLS HUB</span></div>
+            </a>
+            <a href="index.html" class="back-home-btn">হোমপেজে ফিরুন</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1>ব্যবহারের শর্তাবলী</h1>
+            <p>সর্বশেষ আপডেট: ১৩ সেপ্টেম্বর, ২০২৫</p>
+        </div>
+
+        <div class="container">
+            <div class="terms-container">
+                
+                <div class="terms-section">
+                    <p><strong>Bangladesh Cyber Troops</strong> দ্বারা পরিচালিত <strong>BCT TOOLS HUB</strong> ওয়েবসাইটে আপনাকে স্বাগতম। আমাদের ওয়েবসাইট এবং পরিষেবাগুলো ব্যবহার করার আগে অনুগ্রহ করে এই ব্যবহারের শর্তাবলী ("শর্তাবলী") মনোযোগ দিয়ে পড়ুন। আমাদের পরিষেবা ব্যবহার করার মাধ্যমে, আপনি এই শর্তাবলী মেনে চলতে সম্মত হচ্ছেন।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-check-to-slot"></i></span>শর্তাবলীর স্বীকৃতি</h2>
+                    <p>এই ওয়েবসাইটে প্রবেশ করে বা এর টুলগুলো ব্যবহার করে, আপনি এই শর্তাবলী দ্বারা আইনত আবদ্ধ হতে সম্মত হন। আপনি যদি এই শর্তাবলীর কোনো অংশের সাথে একমত না হন, তবে আপনাকে আমাদের পরিষেবা ব্যবহার না করার জন্য অনুরোধ করা হচ্ছে।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-tools"></i></span>পরিষেবার ব্যবহার</h2>
+                    <p>BCT TOOLS HUB আপনাকে বিভিন্ন অনলাইন টুলস বিনামূল্যে ব্যবহারের সুযোগ প্রদান করে। আপনি আমাদের পরিষেবাগুলো শুধুমাত্র বৈধ উদ্দেশ্যে ব্যবহার করতে সম্মত হচ্ছেন। নিম্নলিখিত কার্যকলাপগুলো কঠোরভাবে নিষিদ্ধ:</p>
+                    <ul>
+                        <li>আমাদের টুল বা ওয়েবসাইট ব্যবহার করে কোনো অবৈধ বা ক্ষতিকারক কার্যকলাপ পরিচালনা করা।</li>
+                        <li>ওয়েবসাইটের স্বাভাবিক কার্যক্রমে বাধা সৃষ্টি করা বা এর নিরাপত্তা লঙ্ঘন করার চেষ্টা করা।</li>
+                        <li>অন্য কোনো ব্যবহারকারীর অভিজ্ঞতাকে বাধাগ্রস্ত করা।</li>
+                        <li>আমাদের সিস্টেম বা নেটওয়ার্কে অননুমোদিত প্রবেশের চেষ্টা করা।</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-copyright"></i></span>মেধাস্বত্ব (Intellectual Property)</h2>
+                    <p>এই ওয়েবসাইটের সমস্ত কনটেন্ট, টুলস, লোগো, গ্রাফিক্স, এবং ডিজাইন BCT TOOLS HUB-এর সম্পত্তি এবং মেধাস্বত্ব আইন দ্বারা সুরক্ষিত। আমাদের লিখিত অনুমতি ছাড়া কোনো কনটেন্ট বা টুলস বাণিজ্যিক বা অবাণিজ্যিক উদ্দেশ্যে কপি, বিতরণ বা পুনরুৎপাদন করা যাবে না।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-triangle-exclamation"></i></span>দায়মুক্তি (Disclaimer of Warranties)</h2>
+                    <p>আমাদের পরিষেবাগুলো "যেমন আছে" এবং "যেভাবে উপলব্ধ" ভিত্তিতে প্রদান করা হয়। আমরা কোনো প্রকার ওয়্যারেন্টি প্রদান করি না যে আমাদের টুলগুলো ত্রুটিমুক্ত, নির্ভরযোগ্য বা নিরবচ্ছিন্ন হবে। আমাদের টুলস ব্যবহারের ফলে সৃষ্ট কোনো প্রত্যক্ষ বা পরোক্ষ ক্ষতির জন্য BCT TOOLS HUB বা এর সদস্যরা দায়ী থাকবে না।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-ban"></i></span>পরিষেবা স্থগিত বা বাতিল</h2>
+                    <p>আমরা কোনো পূর্ব বিজ্ঞপ্তি ছাড়াই যেকোনো সময় আমাদের পরিষেবা বা আপনার অ্যাক্সেস স্থগিত বা বাতিল করার অধিকার সংরক্ষণ করি, বিশেষ করে যদি আপনি এই শর্তাবলীর কোনো একটি লঙ্ঘন করেন।</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-pen-nib"></i></span>শর্তাবলী পরিবর্তন</h2>
+                    <p>আমরা সময়ে সময়ে এই ব্যবহারের শর্তাবলী পরিবর্তন বা আপডেট করার অধিকার রাখি। যেকোনো পরিবর্তন এই পেজে পোস্ট করা হবে এবং পৃষ্ঠার শীর্ষে "সর্বশেষ আপডেট" তারিখটিও পরিবর্তন করা হবে। পরিষেবা ব্যবহার চালিয়ে যাওয়ার মাধ্যমে আপনি পরিবর্তিত শর্তাবলী মেনে নিচ্ছেন বলে গণ্য হবে।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-gavel"></i></span>পরিচালনাকারী আইন</h2>
+                    <p>এই শর্তাবলী বাংলাদেশের আইন অনুযায়ী পরিচালিত এবং ব্যাখ্যা করা হবে। এই শর্তাবলী সম্পর্কিত যেকোনো বিরোধ বাংলাদেশের আদালতের এখতিয়ারভুক্ত হবে।</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2><span class="icon-wrapper"><i class="fas fa-envelope"></i></span>যোগাযোগ</h2>
+                    <div class="contact-box">
+                        <p>এই ব্যবহারের শর্তাবলী সম্পর্কে আপনার কোনো প্রশ্ন থাকলে, অনুগ্রহ করে আমাদের ডেভেলপারের সাথে যোগাযোগ করুন:</p>
+                        <p><strong>Kelvin Ashford</strong><br>
+                        <strong>যোগাযোগ:</strong> <a href="kelvinashford.html">Bangladesh Cyber Troops</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+             <div class="footer-bottom">
+                <p> © 2025 BCT TOOLS HUB | Developed By <a href="kelvinashford.html" target="_blank">Kelvin Ashford</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Defaced by BCT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #000000 0%, #111111 100%);
+      font-family: 'Courier New', monospace;
+      color: #00ff99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #00ff99;
+      box-shadow: 0 0 20px #00ff99;
+      object-fit: cover;
+    }
+
+    .hacked-by {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ff99, 0 0 30px #00ff99;
+    }
+
+    .warning {
+      margin-top: 40px;
+      font-size: 20px;
+      color: red;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid red;
+      border-left: 5px solid #ff0000;
+      padding: 20px;
+      max-width: 700px;
+      text-shadow: 0 0 8px red, 0 0 20px #ff0000;
+      box-shadow: 0 0 15px red;
+      animation: flicker 1.5s infinite, glowPulse 2s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 55% {
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 10px red, 0 0 20px #ff0000;
+      }
+      50% {
+        box-shadow: 0 0 20px red, 0 0 40px #ff3333;
+      }
+      100% {
+        box-shadow: 0 0 10px red, 0 0 20px #ff0000;
+      }
+    }
+
+    .palestine-message {
+      margin-top: 40px;
+      font-size: 30px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #ff0000, 0 0 30px #00ff00;
+      font-weight: bold;
+    }
+
+    .telegram-button {
+      margin-top: 30px;
+    }
+
+    .telegram-button a {
+      background-color: #0088cc;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #0088cc;
+      transition: 0.3s;
+    }
+
+    .telegram-button a:hover {
+      background-color: #005577;
+      box-shadow: 0 0 20px #00cfff;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media(max-width: 600px) {
+      .warning {
+        font-size: 16px;
+      }
+
+      .palestine-message {
+        font-size: 22px;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .hacked-by {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <img class="logo" src="https://i.ibb.co/vxHP5bQ2/20250711-163311.png" alt="BCT Logo" />
+  </div>
+
+  <!-- Hacked By Line -->
+  <div class="hacked-by">HACKED BY BANGLADESH CYBER TROOPS</div>
+  <div class="hacked-by" style="font-size: 20px; color: #ff0066; text-shadow: 0 0 10px #ff3399, 0 0 20px #ff3399;">
+    ~ Kelvin Ashford ~
+  </div>
+
+  <!-- Warning Message -->
+  <div class="warning">
+    <strong>⚠️ FINAL WARNING TO INDIAN AUTHORITIES ⚠️</strong><br><br>
+    Stop the persecution of Muslims in India — or face unstoppable cyber retaliation.  
+    You control the streets, but not the cyberspace.  
+    We are watching. We are coming.
+  </div>
+
+  <!-- Free Palestine Tag -->
+  <div class="palestine-message">
+    🇵🇸 FREE PALESTINE 🇵🇸
+  </div>
+
+  <!-- Telegram Link -->
+  <div class="telegram-button">
+    <a href="https://t.me/Zero_hex_404" target="_blank">📢 Join Us on Telegram</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    ~ We Are The Voice Of The Voiceless ~
+  </div>
+
+  <!-- Background Audio (Hidden iframe) -->
+  <iframe 
+    src="https://vocaroo.com/embed/13fk7FkVqG7S?autoplay=1" 
+    allow="autoplay" 
+    style="width:0;height:0;border:0; position:absolute; visibility:hidden;">
+  </iframe>
+
+</body>
+</html>
