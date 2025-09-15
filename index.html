@@ -87,10 +87,17 @@
 
         /* --- Tools Section --- */
         #tools { background-color: var(--surface-color); }
-        .search-container { margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; position: relative; }
+        .search-container { margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto; position: relative; }
         #searchInput { width: 100%; padding: 16px 20px 16px 50px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 1rem; transition: all var(--transition-speed); }
         #searchInput:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
         .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        
+        /* New Category Filter Styles */
+        .category-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+        .category-btn { background-color: var(--surface-color); color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 20px; border-radius: 9999px; cursor: pointer; font-weight: 600; transition: all var(--transition-speed); }
+        .category-btn:hover { background-color: var(--primary-light); color: var(--primary); border-color: var(--primary-light); }
+        .category-btn.active { background-color: var(--primary); color: white; border-color: var(--primary); }
+
         #toolsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
         .tool-card { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 30px; text-align: center; transition: all var(--transition-speed) ease; display: flex; flex-direction: column; }
         .tool-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-glow); }
@@ -203,6 +210,9 @@
                     <i class="fas fa-search"></i>
                     <input type="search" id="searchInput" placeholder="আপনার প্রয়োজনীয় টুলটি খুঁজুন...">
                 </div>
+                <!-- New Category Filters Container -->
+                <div class="category-filters fade-in-up" id="categoryFilters"></div>
+                
                 <div id="toolsGrid"></div>
                 <p id="noResultsMessage">কোনো ফলাফল পাওয়া যায়নি।</p>
             </div>
@@ -257,6 +267,7 @@
             
             const loader = document.getElementById('loader');
             let allToolsData = []; 
+            let currentCategory = 'all'; // State for active category
 
             // --- API Fetching ---
             async function loadContent() {
@@ -298,7 +309,8 @@
                 document.getElementById('toolsBadge').textContent = data.tools.badge;
                 document.getElementById('toolsTitle').textContent = data.tools.title;
                 document.getElementById('toolsDescription').textContent = data.tools.description;
-                displayTools(data.tools.items);
+                displayCategories(allToolsData);
+                displayTools(allToolsData);
 
                 // Features Section
                 document.getElementById('featuresBadge').textContent = data.features.badge;
@@ -317,12 +329,65 @@
                 renderFooter(data);
                 setupScrollAnimations();
             }
+            
+            // --- NEW: Category Display Function ---
+            function displayCategories(tools) {
+                const categoryFilters = document.getElementById('categoryFilters');
+                // Extract unique categories. A Set is used to automatically handle duplicates.
+                const categories = ['all', ...new Set(tools.map(tool => tool.category).filter(Boolean))];
+                
+                categoryFilters.innerHTML = ''; // Clear existing buttons
+                categories.forEach(category => {
+                    const button = document.createElement('button');
+                    button.className = 'category-btn';
+                    button.textContent = category === 'all' ? 'সকল টুলস' : category;
+                    button.dataset.category = category;
+                    if (category === currentCategory) {
+                        button.classList.add('active');
+                    }
+                    button.addEventListener('click', () => {
+                        currentCategory = category;
+                        // Update active class on buttons
+                        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        filterAndDisplayTools();
+                    });
+                    categoryFilters.appendChild(button);
+                });
+            }
+
+            // --- UPDATED: Central Filter and Display Function ---
+            function filterAndDisplayTools() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+                
+                let filteredTools = allToolsData;
+
+                // 1. Filter by category
+                if (currentCategory !== 'all') {
+                    filteredTools = filteredTools.filter(tool => tool.category === currentCategory);
+                }
+
+                // 2. Filter by search term
+                if (searchTerm) {
+                    filteredTools = filteredTools.filter(tool => 
+                        tool.title.toLowerCase().includes(searchTerm) || 
+                        tool.description.toLowerCase().includes(searchTerm) ||
+                        (tool.tags && tool.tags.toLowerCase().includes(searchTerm)) // Enhanced search with tags
+                    );
+                }
+                
+                displayTools(filteredTools);
+                setupScrollAnimations(); // Re-run animations for new items
+            }
 
             function displayTools(tools) {
                 const toolsGrid = document.getElementById('toolsGrid');
                 toolsGrid.innerHTML = '';
                 const noResultsMessage = document.getElementById('noResultsMessage');
-                if (tools.length === 0) { noResultsMessage.style.display = 'block'; return; }
+                if (tools.length === 0) { 
+                    noResultsMessage.style.display = 'block'; 
+                    return; 
+                }
                 noResultsMessage.style.display = 'none';
 
                 tools.forEach(tool => {
@@ -382,14 +447,9 @@
 
             scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase().trim();
-                const filteredTools = allToolsData.filter(tool => 
-                    tool.title.toLowerCase().includes(searchTerm) || tool.description.toLowerCase().includes(searchTerm)
-                );
-                displayTools(filteredTools);
-                setupScrollAnimations();
-            });
+            
+            // UPDATED search input listener
+            searchInput.addEventListener('input', filterAndDisplayTools);
 
             function setupScrollAnimations() {
                 const observer = new IntersectionObserver((entries) => {
