@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCT TOOLS HUB - Unique 3D Login</title>
+    
+    <style>
+        /* Google Fonts থেকে Roboto ও Hind Siliguri ফন্ট ইম্পোর্ট */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap');
+
+        /* ভ্যারিয়েবল এবং সাধারণ স্টাইল */
+        :root {
+            --primary-color: #007BFF; --primary-hover: #0056b3;
+            --error-color: #e74c3c; --success-color: #2ecc71;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Hind Siliguri', 'Roboto', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 16px; perspective: 2000px; /* 3D ইফেক্টের জন্য গভীরতা */
+            background: linear-gradient(45deg, #fbc2eb, #a6c1ee, #84fab0, #8fd3f4);
+            background-size: 400% 400%;
+            animation: animatedGradient 15s ease infinite;
+        }
+
+        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড */
+        @keyframes animatedGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 3D ইন্টারেক্টিভ কার্ড (গ্লাসমরফিজম) */
+        .login-card {
+            width: 100%; max-width: 380px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            padding: 32px; position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear; /* মাউসের নড়াচড়ার সাথে দ্রুত সাড়া দেওয়ার জন্য */
+        }
+        
+        /* কার্ডের ভেতরের উপাদানগুলোর জন্য প্যারালাক্স ইফেক্ট */
+        .login-header, .login-form, .divider, .signup-link {
+            transform-style: preserve-3d;
+        }
+        .app-logo { transform: translateZ(50px); }
+        .login-header h2 { transform: translateZ(40px); }
+        .login-header p { transform: translateZ(30px); }
+        .form-group { transform: translateZ(30px); }
+        .material-btn { transform: translateZ(20px); }
+        .signup-link { transform: translateZ(10px); }
+
+        /* হেডার এবং লোগো */
+        .login-header { text-align: center; margin-bottom: 28px; }
+        .app-logo { width: 70px; height: 70px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .login-header h2 { font-size: 24px; font-weight: 600; color: #1e2125; }
+        .login-header p { margin-top: 4px; color: #3d3d3d; }
+
+        /* ফর্ম গ্রুপ এবং ইনপুট */
+        .form-group { margin-bottom: 24px; position: relative; }
+        .input-wrapper { position: relative; }
+        .input-wrapper input {
+            width: 100%; border: none; background-color: transparent;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            padding: 12px 0; font-size: 16px;
+            position: relative; z-index: 1; transition: border-color 0.3s;
+            color: #333;
+        }
+        .input-wrapper input:focus { outline: none; border-bottom-color: var(--primary-color); }
+        .input-wrapper label { position: absolute; top: 12px; left: 0; color: #555; font-size: 16px; pointer-events: none; transition: all 0.3s ease; }
+        .input-wrapper input:focus + label, .input-wrapper input:valid + label { top: -14px; font-size: 12px; color: var(--primary-color); }
+
+        /* পাসওয়ার্ড টগল */
+        .password-toggle { position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 5px; z-index: 2; opacity: 0.6; color: #333; }
+        
+        /* এরর মেসেজ */
+        .error-message { color: var(--error-color); font-size: 13px; display: block; height: 16px; margin-top: 4px; opacity: 0; transition: opacity 0.3s ease; font-weight: 500; }
+        .form-group.error .error-message { opacity: 1; }
+        .form-group.error .input-wrapper input { border-bottom-color: var(--error-color); }
+        .form-group.error .input-wrapper label { color: var(--error-color); }
+        
+        /* 3D বাটন */
+        .material-btn {
+            width: 100%; padding: 14px; background: var(--primary-color);
+            color: #fff; border: none; border-radius: 8px; font-size: 16px;
+            font-weight: 600; cursor: pointer; position: relative;
+            box-shadow: 0 4px var(--primary-hover), 0 6px 15px rgba(0, 123, 255, 0.4);
+            transition: all 0.1s ease-in-out; margin-top: 8px;
+        }
+        .material-btn:hover:not(:disabled) { background: var(--primary-hover); }
+        .material-btn:active:not(:disabled) { transform: translateY(2px) translateZ(18px); box-shadow: 0 2px var(--primary-hover), 0 4px 10px rgba(0, 123, 255, 0.4); }
+        .material-btn:disabled { background: #bdc3c7; box-shadow: 0 4px 0 #95a5a6; cursor: not-allowed; }
+
+        /* লোডার */
+        .btn-loader { position: absolute; top:0; left:0; right:0; bottom:0; display:flex; justify-content:center; align-items:center; opacity:0; transition:opacity .3s; }
+        .material-btn.loading .btn-text { opacity:0; }
+        .material-btn.loading .btn-loader { opacity:1; }
+        .loader-path { stroke:#fff; stroke-linecap:round; animation:dash 1.5s ease-in-out infinite; }
+        @keyframes dash { 0%{stroke-dasharray:1,150;stroke-dashoffset:0} 50%{stroke-dasharray:90,150;stroke-dashoffset:-35} 100%{stroke-dasharray:90,150;stroke-dashoffset:-124} }
+        
+        /* সাইনআপ লিঙ্ক */
+        .divider { text-align: center; margin: 24px 0; color: #333; }
+        .signup-link { text-align: center; margin-top: 24px; font-size: 14px; }
+        .create-account { color: var(--primary-color); font-weight: 600; text-decoration: none; }
+
+        /* সাকসেস মেসেজ */
+        .success-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; z-index: 10; pointer-events: none; }
+        .success-overlay.show { opacity: 1; pointer-events: all; }
+        .success-box { text-align: center; transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+        .success-overlay.show .success-box { transform: scale(1); }
+        .success-icon { width: 80px; height: 80px; background: var(--success-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; }
+        .success-icon svg { fill: #fff; width: 48px; height: 48px; }
+        .success-box h3 { color: #34495e; } .success-box p { color: #7f8c8d; }
+
+        /* ইনিশিয়াল লোডার */
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 999; }
+        
+        /* রেসপন্সিভ ডিজাইন */
+        @media (max-width: 480px) {
+            body { padding: 0; align-items: stretch; }
+            .login-card { max-width: 100%; height: 100vh; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; justify-content: center; background: rgba(255, 255, 255, 0.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="initial-loader">
+        <svg class="loader-circle" viewBox="0 0 50 50" style="width: 50px; height: 50px;"><circle class="loader-path" cx="25" cy="25" r="12" fill="none" stroke-width="4" stroke="var(--primary-color)"/></svg>
+    </div>
+
+    <div class="login-card" style="display: none;">
+        <div class="login-header">
+            <img src="https://i.ibb.co/MyZXHdHf/app-icon.png" alt="BCT TOOLS HUB Logo" class="app-logo">
+            <h2>BCT TOOLS HUB এ স্বাগতম</h2>
+            <p>চালিয়ে যেতে সাইন ইন করুন</p>
+        </div>
+        
+        <form class="login-form" id="loginForm" novalidate>
+            <div class="form-group"><div class="input-wrapper"><input type="email" id="email" name="email" required autocomplete="email"><label for="email">ইমেল</label></div><span class="error-message" id="emailError"></span></div>
+            <div class="form-group"><div class="input-wrapper"><input type="password" id="password" name="password" required autocomplete="current-password"><label for="password">পাসওয়ার্ড</label><button type="button" class="password-toggle" id="passwordToggle"><svg id="eyeIcon" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg></button></div><span class="error-message" id="passwordError"></span></div>
+            <button type="submit" class="login-btn material-btn"><span class="btn-text">সাইন ইন করুন</span><div class="btn-loader"><svg class="loader-circle" viewBox="0 0 50 50"><circle class="loader-path" cx="25" cy="25" r="12" fill="none" stroke-width="3"/></svg></div></button>
+        </form>
+        
+        <div class="divider"></div>
+
+        <div class="signup-link"><p>কোনো একাউন্ট নেই? <a href="#" class="create-account" id="createAccountLink">একাউন্ট তৈরি করুন</a></p></div>
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-box">
+            <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            <h3 id="successTitle">স্বাগতম!</h3>
+            <p id="successText">আপনাকে সাইন ইন করা হচ্ছে...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBS0NuzgPYPV-NCnsIQdbncIOl8Xzyopg0",
+            authDomain: "shoppingapp-bct.firebaseapp.com",
+            databaseURL: "https://shoppingapp-bct-default-rtdb.firebaseio.com",
+            projectId: "shoppingapp-bct",
+            storageBucket: "shoppingapp-bct.appspot.com",
+            messagingSenderId: "300431447990",
+            appId: "1:300431447990:web:e497504806ea547f799317",
+            measurementId: "G-BNBHLM702Z"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        class LoginForm {
+            constructor() {
+                this.elements = {
+                    form: document.getElementById('loginForm'), emailInput: document.getElementById('email'),
+                    passwordInput: document.getElementById('password'), passwordToggle: document.getElementById('passwordToggle'),
+                    submitButton: document.querySelector('.material-btn'), createAccountLink: document.getElementById('createAccountLink'),
+                    successOverlay: document.getElementById('successOverlay'), successTitle: document.getElementById('successTitle'),
+                    successText: document.getElementById('successText'), initialLoader: document.getElementById('initial-loader'),
+                    loginCard: document.querySelector('.login-card')
+                };
+                this.isSignUpMode = false;
+                this.redirectURL = 'main.html/';
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                this.init3DAnimation();
+            }
+            
+            init3DAnimation() {
+                const card = this.elements.loginCard;
+                const maxRotation = 10; // সর্বোচ্চ কত ডিগ্রি ঘুরবে
+
+                card.addEventListener('mousemove', (e) => {
+                    const { width, height } = card.getBoundingClientRect();
+                    const { offsetX, offsetY } = e;
+
+                    const rotateX = maxRotation * ((offsetY / height) - 0.5) * -1;
+                    const rotateY = maxRotation * ((offsetX / width) - 0.5);
+
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            }
+
+            bindEvents() {
+                // ... আগের মতোই ...
+                this.elements.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.elements.createAccountLink.addEventListener('click', (e) => this.toggleMode(e));
+                this.elements.passwordToggle.addEventListener('click', () => this.togglePasswordVisibility());
+                ['email', 'password'].forEach(field => this.elements[`${field}Input`].addEventListener('input', () => this.clearError(field)));
+            }
+            
+            togglePasswordVisibility() { this.elements.passwordInput.type = this.elements.passwordInput.type === 'password' ? 'text' : 'password'; }
+            toggleMode(e) { e.preventDefault(); this.isSignUpMode = !this.isSignUpMode; this.elements.submitButton.querySelector('.btn-text').textContent = this.isSignUpMode ? 'একাউন্ট তৈরি করুন' : 'সাইন ইন করুন'; this.elements.createAccountLink.innerHTML = this.isSignUpMode ? 'ইতিমধ্যে একাউন্ট আছে? <a href="#" class="create-account">সাইন ইন করুন</a>' : 'কোনো একাউন্ট নেই? <a href="#" class="create-account">একাউন্ট তৈরি করুন</a>'; }
+            validate(field, regex, message) { const input = this.elements[`${field}Input`]; if (!regex.test(input.value.trim())) { this.showError(field, message); return false; } this.clearError(field); return true; }
+            showError(field, message) { const group = this.elements[`${field}Input`].closest('.form-group'); group.classList.add('error'); group.querySelector('.error-message').textContent = message; }
+            clearError(field) { const group = this.elements[`${field}Input`].closest('.form-group'); group.classList.remove('error'); }
+            setLoading(loading) { this.elements.submitButton.classList.toggle('loading', loading); this.elements.submitButton.disabled = loading; }
+            showSuccess(title, text) { this.elements.successTitle.textContent = title; this.elements.successText.textContent = text; this.elements.successOverlay.classList.add('show'); setTimeout(() => { window.location.href = this.redirectURL; }, 2000); }
+            getFirebaseErrorMessage(error) { switch (error.code) { case 'auth/user-not-found': return 'এই ইমেল দিয়ে কোনো একাউন্ট পাওয়া যায়নি।'; case 'auth/wrong-password': return 'আপনার পাসওয়ার্ডটি ভুল।'; case 'auth/email-already-in-use': return 'এই ইমেলটি ইতিমধ্যে ব্যবহৃত হচ্ছে।'; case 'auth/invalid-email': return 'আপনার ইমেল ঠিকানাটি সঠিক নয়।'; case 'auth/weak-password': return 'পাসওয়ার্ডটি খুবই দুর্বল।'; default: return 'একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।'; } }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                if (!this.validate('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'একটি বৈধ ইমেল লিখুন।') || !this.validate('password', /.{6,}/, 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।')) return;
+
+                this.setLoading(true);
+                try {
+                    await setPersistence(auth, browserLocalPersistence);
+                    const { emailInput, passwordInput } = this.elements;
+                    if (this.isSignUpMode) {
+                        await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                        this.showSuccess('একাউন্ট তৈরি হয়েছে!', 'আপনাকে সফলভাবে সাইন আপ করা হয়েছে...');
+                    } else {
+                        await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                        this.showSuccess('স্বাগতম!', 'আপনাকে সাইন ইন করা হচ্ছে...');
+                    }
+                } catch (error) {
+                    this.showError('password', this.getFirebaseErrorMessage(error));
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            showLoginUI() {
+                this.elements.initialLoader.style.display = 'none';
+                this.elements.loginCard.style.display = 'block'; // 'flex' এর পরিবর্তে 'block'
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = new LoginForm();
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    window.location.href = loginForm.redirectURL;
+                } else {
+                    loginForm.showLoginUI();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
